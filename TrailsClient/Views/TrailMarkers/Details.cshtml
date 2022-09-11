@@ -1,0 +1,20 @@
+@TrailClient.Models.TrailMarker
+
+<h1>Trailmarker Info:</h1>
+<ul>
+    <li>ID: @Model.TrailMarkerId</li>
+    <li>Name: @Model.Name</li>
+    <li>Longitude: @Model.Longitude</li>
+    <li>Latitude: @Model.Latitude</li>
+    <li>Trailhead?: @Model.isTrailhead</li>
+    <li>Landmark?: @Model.isLandmark</li>
+    <li>Description: @Model.Description</li>
+</ul>
+<br>
+
+<a href="/TrailMarkers/Edit/@(Model.TrailMarkerId)"><p>Edit</p></a>
+<br>
+
+<a href="/TrailMarkers"><p>Return</p></a>
+
+<a href="/TrailMarkers/Delete/@(Model.TrailMarkerId)"><p>DELETE Trailmarker</p></a>
