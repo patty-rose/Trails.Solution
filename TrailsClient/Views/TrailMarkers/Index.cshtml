@@ -1,0 +1,17 @@
+<h1>All TrailMarkers:</h1>
+
+<p>@Html.ActionLink("Add new trailMarker", "Create")</p>
+
+<ol>
+@foreach (TrailMarker trailMarker in Model)
+{
+  <ul>
+      <li>@trailMarker.FirstName @trailMarker.LastName</li>
+  </ul>
+  @* <a href="/TrailMarkers/Details/@(trailMarker.TrailMarkerId)"><p>View Details</p></a> *@
+  <br>
+  <p>@Html.ActionLink("TrailMarker Details", "Details", new { id = trailMarker.TrailMarkerId })</p>
+  <p>@Html.ActionLink("Edit TrailMarker", "Edit", new { id = trailMarker.TrailMarkerId })</p>
+  <p>@Html.ActionLink("Delete TrailMarker", "Delete", new { id = trailMarker.TrailMarkerId })</p>
+}
+</ol>
