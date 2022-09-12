@@ -1,27 +1,37 @@
+@{
+  Layout = "_Layout";
+}
 
+@model TrailsClient.Models.TrailMarker
 
+<h1>Edit this trail marker: @Html.DisplayFor(model => model.Name)</h1>
 
-<h1>Edit Trail Markers:</h1>
-<div class="settings">
-<form action="/TrailMarkers/Details/@(Model.TrailMarkerId)" method="post">
-  <label for="name">Trail Marker Name</label>
-  <input id="name" name="name" type="text" value="@(Model.Name)">
+@using (Html.BeginForm())
+{
+  <div class="settings">
+  @Html.HiddenFor(model => model.TrailMarkerId)
 
-  <label for="longitude">Trail Marker Longitude</label>
-  <input id="longitude" name="longitude" type="number" value="@(Model.Longitude)">
-  
-  <label for="latitude">Trail Marker Latitude</label>
-  <input id="latitude" name="latitude" type="number" value="@(Model.Latitude)">
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
 
-  <fieldset>Is it a trailhead or landmark <select id="markerType" name="markerType">
-  <option value="0">Landmark</option>
-  <option selected="selected" value="1">Trailhead</option>
-  </select>
-  </fieldset>
+  @Html.LabelFor(model => model.Longitude)
+  @Html.EditorFor(model => model.Longitude)
 
-  <input id="description" name="description" type="text" value="@(Model.Description)">
+  @Html.LabelFor(model => model.Latitude)
+  @Html.EditorFor(model => model.Latitude)  
 
-  <input class = "btn btn-secondary" type="submit">Go!</button>
-</form>
-</div>
+  @Html.LabelFor(model => model.isLandmark)
+  @Html.EditorFor(model => model.isLandmark)
+
+  @Html.LabelFor(model => model.isTrailhead)
+  @Html.EditorFor(model => model.isTrailhead)
+
+  @Html.LabelFor(model => model.Description)
+  @Html.EditorFor(model => model.Description)
+
+  <input class="btn btn-secondary" type="submit" value="Save" />
+  </div>
+}
+
+<hr>
 <a href="/TrailMarkers/Details/@(Model.TrailMarkerId)"><p>Return to Details</p></a>
