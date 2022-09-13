@@ -4,28 +4,34 @@
 
 @model TrailsClient.Models.TrailMarker
 
-
-<h1>Edit Trail Markers:</h1>
+<h1>Edit this trail marker: @Html.DisplayFor(model => model.Name)</h1>
 
 @using (Html.BeginForm())
 {
   <div class="settings">
-    @Html.HiddenFor(model => model.TrailMarkerId)
+  @Html.HiddenFor(model => model.TrailMarkerId)
 
-    @Html.LabelFor(model => model.Name)
-    @Html.TextBoxFor(model => model.Name)
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
 
-    @Html.LabelFor(model => model.Longitude)
-    @Html.TextBoxFor(model => model.Longitude, new { type="number" })
+  @Html.LabelFor(model => model.Longitude)
+  @Html.EditorFor(model => model.Longitude)
 
-    @Html.LabelFor(model => model.Latitude)
-    @Html.TextBoxFor(model => model.Latitude, new { type="number" })
+  @Html.LabelFor(model => model.Latitude)
+  @Html.EditorFor(model => model.Latitude)  
 
-    @Html.LabelFor(model => model.Description)
-    @Html.TextBoxFor(model => model.Description)
+  @Html.LabelFor(model => model.isLandmark)
+  @Html.EditorFor(model => model.isLandmark)
+
+  @Html.LabelFor(model => model.isTrailhead)
+  @Html.EditorFor(model => model.isTrailhead)
+
+  @Html.LabelFor(model => model.Description)
+  @Html.EditorFor(model => model.Description)
+
+  <input class="btn btn-secondary" type="submit" value="Save" />
   </div>
-
-  <input class = "btn btn-secondary" type="submit" value="update character"/>
 }
 
+<hr
 <a href="/TrailMarkers/Details/@(Model.TrailMarkerId)"><p>Return to Details</p></a>
