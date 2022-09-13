@@ -1,27 +1,31 @@
+@{
+  Layout = "_Layout";
+}
 
+@model TrailsClient.Models.TrailMarker
 
 
 <h1>Edit Trail Markers:</h1>
-<div class="settings">
-<form action="/TrailMarkers/Details/@(Model.TrailMarkerId)" method="post">
-  <label for="name">Trail Marker Name</label>
-  <input id="name" name="name" type="text" value="@(Model.Name)">
 
-  <label for="longitude">Trail Marker Longitude</label>
-  <input id="longitude" name="longitude" type="number" value="@(Model.Longitude)">
-  
-  <label for="latitude">Trail Marker Latitude</label>
-  <input id="latitude" name="latitude" type="number" value="@(Model.Latitude)">
+@using (Html.BeginForm())
+{
+  <div class="settings">
+    @Html.HiddenFor(model => model.TrailMarkerId)
 
-  <fieldset>Is it a trailhead or landmark <select id="markerType" name="markerType">
-  <option value="0">Landmark</option>
-  <option selected="selected" value="1">Trailhead</option>
-  </select>
-  </fieldset>
+    @Html.LabelFor(model => model.Name)
+    @Html.TextBoxFor(model => model.Name)
 
-  <input id="description" name="description" type="text" value="@(Model.Description)">
+    @Html.LabelFor(model => model.Longitude)
+    @Html.TextBoxFor(model => model.Longitude, new { type="number" })
 
-  <input class = "btn btn-secondary" type="submit">Go!</button>
-</form>
-</div>
+    @Html.LabelFor(model => model.Latitude)
+    @Html.TextBoxFor(model => model.Latitude, new { type="number" })
+
+    @Html.LabelFor(model => model.Description)
+    @Html.TextBoxFor(model => model.Description)
+  </div>
+
+  <input class = "btn btn-secondary" type="submit" value="update character"/>
+}
+
 <a href="/TrailMarkers/Details/@(Model.TrailMarkerId)"><p>Return to Details</p></a>
