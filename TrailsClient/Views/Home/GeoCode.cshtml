@@ -1,0 +1,76 @@
+<!--
+
+To run this demo, you need to replace 'YOUR_API_KEY' with an API key from the ArcGIS Developers dashboard.
+
+Sign up for a free account and get an API key.
+
+https://developers.arcgis.com/documentation/mapping-apis-and-services/get-started/
+
+-->
+
+<div id="viewDiv"></div>
+@section Scripts
+{
+<style>
+  html, body, #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 88vh;
+    width: 99vw;
+  }
+</style>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.24/"></script>
+  <script>
+
+require([
+  "esri/config",
+  "esri/Map",
+  "esri/views/MapView",
+
+  "esri/rest/locator"
+
+], function(esriConfig,Map, MapView, locator) {
+
+  esriConfig.apiKey = "AAPK7691fadea68d4c688c09d108d1cd1d7cSxgmrGZq1iMecdeWEN29tO3QCLIzXUFXyg4PLvxYtshTAFhyxYK6D4d2m-vnNbrK";
+
+  const map = new Map({
+    basemap: "arcgis-navigation"
+  });
+
+  const view = new MapView({
+    container: "viewDiv",
+    map: map,
+    center: [-78.50169,-0.21489],
+    zoom: 12
+  });
+
+  const serviceUrl = "http://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer";
+
+  view.on("click", function(evt){
+      const params = {
+        location: evt.mapPoint
+      };
+
+      locator.locationToAddress(serviceUrl, params)
+        .then(function(response) { // Show the address found
+          const address = response.address;
+          showAddress(address, evt.mapPoint);
+        }, function(err) { // Show no address found
+          showAddress("No address found.", evt.mapPoint);
+        });
+
+    });
+
+  function showAddress(address, pt) {
+    view.popup.open({
+      title:  + Math.round(pt.longitude * 100000)/100000 + ", " + Math.round(pt.latitude * 100000)/100000,
+      content: address,
+      location: pt
+    });
+  }
+
+});
+</script>
+
+}
