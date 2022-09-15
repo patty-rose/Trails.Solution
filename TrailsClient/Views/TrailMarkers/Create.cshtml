@@ -1,14 +1,50 @@
+@model TrailsClient.Models.TrailMarker
 
-<div id="viewDiv"></div>
+<div class="container">
+  <div class="row">
+    <div class = "col">
+      <h1>Add a new Trail Marker</h1>
+        @using (Html.BeginForm())
+        {
+          <div class="settings">
+            @Html.HiddenFor(model => model.TrailMarkerId)
+
+            @Html.LabelFor(model => model.Name)
+            @Html.EditorFor(model => model.Name)
+
+            @Html.LabelFor(model => model.Longitude)
+            @Html.EditorFor(model => model.Longitude)
+
+            @Html.LabelFor(model => model.Latitude)
+            @Html.EditorFor(model => model.Latitude)  
+
+            @Html.LabelFor(model => model.isLandmark)
+            @Html.EditorFor(model => model.isLandmark)
+
+            @Html.LabelFor(model => model.isTrailhead)
+            @Html.EditorFor(model => model.isTrailhead)
+
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+          </div>
+
+          <input class = "btn btn-secondary" type="submit" value="Add new Character"/>
+        }
+    </div>
+    <div class = "col">
+      <div id="viewDiv"></div>
+    </div>
+  </div>
+</div>  
+
 @section Scripts
 {
-  
 <style>
-  html, body, #viewDiv {
+  #viewDiv {
     padding: 0;
     margin: 0;
     height: 88vh;
-    width: 99vw;
+    width: 100%;
   }
 </style>
   <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css">
@@ -40,19 +76,24 @@ require([
   const serviceUrl = "http://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer";
 
   view.on("click", function(evt){
-    console.log(evt);
       const params = {
         location: evt.mapPoint
       };
 
+        var long = Math.round(evt.mapPoint.longitude * 100000)/100000;
+        var lat = Math.round(evt.mapPoint.latitude * 100000)/100000;
+
+        document.getElementsById('Longitude')[0].value = long;
+        document.getElementsById('Latitude')[0].value = lat;
+
       locator.locationToAddress(serviceUrl, params)
         .then(function(response) { // Show the address found
           const address = response.address;
-          console.log(address, 'address');
           showAddress(address, evt.mapPoint);
         }, function(err) { // Show no address found
           showAddress("No address found.", evt.mapPoint);
         });
+
         
     });
 
@@ -60,9 +101,8 @@ require([
     view.popup.open({
       title:  + Math.round(pt.longitude * 100000)/100000 + ", " + Math.round(pt.latitude * 100000)/100000,
       content: address,
-      location: pt
-      console.log(pt, 'pt');
-      console.log(title, 'title');
+      location: pt,
+
     });
   }
 
