@@ -80,12 +80,6 @@ require([
         location: evt.mapPoint
       };
 
-        var long = Math.round(evt.mapPoint.longitude * 100000)/100000;
-        var lat = Math.round(evt.mapPoint.latitude * 100000)/100000;
-
-        document.getElementsById('Longitude')[0].value = long;
-        document.getElementsById('Latitude')[0].value = lat;
-
       locator.locationToAddress(serviceUrl, params)
         .then(function(response) { // Show the address found
           const address = response.address;
@@ -94,7 +88,11 @@ require([
           showAddress("No address found.", evt.mapPoint);
         });
 
-        
+        var long = Math.round(evt.mapPoint.longitude * 100000)/100000;
+        var lat = Math.round(evt.mapPoint.latitude * 100000)/100000;
+
+        document.getElementsByName('Longitude')[0].value = long;
+        document.getElementsByName('Latitude')[0].value = lat;
     });
 
   function showAddress(address, pt) {
