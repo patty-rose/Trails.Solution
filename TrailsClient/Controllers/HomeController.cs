@@ -43,5 +43,10 @@ namespace TrailsClient.Controllers
         {
             return View();
         }
+
+          public IActionResult Routing()
+        {
+            return View();
+        }
     }
 }
