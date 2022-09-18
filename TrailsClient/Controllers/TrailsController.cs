@@ -23,5 +23,12 @@ namespace TrailsClient.Controllers
       var allTrails = Trail.GetTrails();
       return View(allTrails);
     }
+
+    public IActionResult Details(int id)
+    {
+      var thisTrail = Trail.GetDetails(id);
+
+      return View(thisTrail);
+    }
   }
 }

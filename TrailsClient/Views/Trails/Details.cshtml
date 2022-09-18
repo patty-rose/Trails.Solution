@@ -1,0 +1,71 @@
+@model TrailsClient.Models.Trail
+
+
+
+<div id="viewDiv"></div>
+
+  @section Scripts
+  {
+  
+    <style>
+        html,
+        body,
+        #viewDiv {
+          padding: 0;
+            margin: 0;
+            height: 88vh;
+            width: 99vw;
+        }
+      </style>
+      
+    <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.24/"></script>
+
+    <script>
+      require(["esri/config","esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer"], function (esriConfig, Map, MapView, Graphic, GraphicsLayer) {
+
+        esriConfig.apiKey = "AAPK7691fadea68d4c688c09d108d1cd1d7cSxgmrGZq1iMecdeWEN29tO3QCLIzXUFXyg4PLvxYtshTAFhyxYK6D4d2m-vnNbrK";
+
+        const map = new Map({
+          basemap: "arcgis-topographic" // Basemap layer service
+        });
+
+        const view = new MapView({
+          map: map,
+          center: [-122.62495,45.52118], // Longitude, latitude --Laurelhurst Park OR
+          zoom: 13, // Zoom level
+          container: "viewDiv" // Div element
+        });
+
+        const graphicsLayer = new GraphicsLayer();
+        map.add(graphicsLayer);
+
+
+        let model = @Html.Raw(Json.Serialize(Model));//convert C# model to Javascript object
+        console.log(model);
+        let trailMarkersCoordinates = [];
+        for ( let i = 0; i < model.trailMarkers.length; i++){
+          trailMarkersCoordinates.push([model.trailMarkers[i].longitude, model.trailMarkers[i].latitude]);
+        }
+
+
+            //longitude: model[i]['longitude'],
+            //latitude: model[i]['latitude']
+        
+        const polyline = {
+        type: "polyline",
+        paths: trailMarkersCoordinates
+          };
+          const simpleLineSymbol = {
+            type: "simple-line",
+            color: [226, 119, 40], // Orange
+            width: 2
+          };
+          const polylineGraphic = new Graphic({
+          geometry: polyline,
+          symbol: simpleLineSymbol
+          });
+          graphicsLayer.add(polylineGraphic);
+      });
+    </script>
+  }

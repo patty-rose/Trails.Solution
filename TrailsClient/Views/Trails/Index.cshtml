@@ -7,7 +7,7 @@
 @foreach (Trail trail in Model)
 {
   <ul>
-      <li>@trail.Name</li>
+      <li> @Html.ActionLink($"{trail.Name}", "Details", new { id = trail.TrailId}) </li>
       @foreach(TrailMarker trailMarker in trail.TrailMarkers)
       {
         <p>@Html.ActionLink($"{trailMarker.Name}", "Details", "TrailMarkers", new {id = trailMarker.TrailMarkerId})</p>
