@@ -30,5 +30,17 @@ namespace TrailsClient.Controllers
 
       return View(thisTrail);
     }
+
+    public IActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public IActionResult Create(Trail trail)
+    {
+      Trail.Post(trail);
+      return RedirectToAction("Index");
+    }
   }
 }
