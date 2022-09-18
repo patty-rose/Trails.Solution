@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using TrailsApi.Models;
 using Microsoft.OpenApi.Models;
 using TrailsApi.Services;
+using System.Text;
 
 namespace TrailsApi
 {
@@ -31,6 +32,7 @@ namespace TrailsApi
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddMvc();
       services.AddDbContext<TrailsApiContext>(opt =>
         opt.UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
       services.AddHttpContextAccessor();
@@ -41,12 +43,10 @@ namespace TrailsApi
           var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
           return new UriService(uri);
       });
-      services.AddControllers();
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "TrailsApi", Version = "v1" });
       });
-
       services.AddApiVersioning(options =>
       {
         options.AssumeDefaultVersionWhenUnspecified = true;
@@ -58,6 +58,9 @@ namespace TrailsApi
         options.GroupNameFormat = "'v'VVV";
         options.SubstituteApiVersionInUrl = true;
       });
+      services.AddControllers().AddNewtonsoftJson(options =>
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+      );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

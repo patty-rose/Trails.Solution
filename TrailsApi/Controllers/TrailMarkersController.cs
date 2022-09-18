@@ -23,13 +23,17 @@ namespace TrailsApi.Controllers
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TrailMarker>>> Get()
     {
-      return await _db.TrailMarkers.ToListAsync();
+      return await _db.TrailMarkers.Include(trailMarker => trailMarker.Trail).ToListAsync();
     }
 
     [HttpPost]
     public async Task<ActionResult<TrailMarker>> Post(TrailMarker trailMarker)
     {
+      Trail thisTrail = _db.Trails.FirstOrDefault(trail => trail.TrailId == trailMarker.TrailId);
       _db.TrailMarkers.Add(trailMarker);
+      thisTrail.TrailMarkers.Add(trailMarker);
+      trailMarker.Trail = thisTrail;
+
       await _db.SaveChangesAsync();
 
       return CreatedAtAction("Post", new { id = trailMarker.TrailMarkerId }, trailMarker);

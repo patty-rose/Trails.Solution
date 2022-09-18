@@ -1,0 +1,22 @@
+<h1>All Trails:</h1>
+
+<p>@Html.ActionLink("Add new trail", "Create")</p>
+
+@using TrailsClient.Models
+<ol>
+@foreach (Trail trail in Model)
+{
+  <ul>
+      <li> @Html.ActionLink($"{trail.Name}", "Details", new { id = trail.TrailId}) </li>
+      @foreach(TrailMarker trailMarker in trail.TrailMarkers)
+      {
+        <p>@Html.ActionLink($"{trailMarker.Name}", "Details", "TrailMarkers", new {id = trailMarker.TrailMarkerId})</p>
+      }
+  </ul>
+  @* <a href="/Trails/Details/@(trail.TrailId)"><p>View Details</p></a> *@
+  <br>
+  <p>@Html.ActionLink("Trail Details", "Details", new { id = trail.TrailId })</p>
+  <p>@Html.ActionLink("Edit Trail", "Edit", new { id = trail.TrailId })</p>
+  <p>@Html.ActionLink("Delete Trail", "Delete", new { id = trail.TrailId })</p>
+}
+</ol>

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TrailsClient.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TrailsClient.Controllers
 {
@@ -33,12 +35,15 @@ namespace TrailsClient.Controllers
 
     public IActionResult Create()
     {
+      ViewBag.TrailId = new SelectList (Trail.GetTrails(), "TrailId", "Name");
       return View();
     }
 
     [HttpPost]
     public IActionResult Create(TrailMarker trailMarker)
     {
+      var thisTrail = Trail.GetDetails(trailMarker.TrailId);
+      thisTrail.TrailMarkers.Add(trailMarker);
       TrailMarker.Post(trailMarker);
       return RedirectToAction("Index");
     }

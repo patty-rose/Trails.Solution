@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrailsApi.Models;
 
-namespace Business.Migrations
+namespace Trails.Migrations
 {
     [DbContext(typeof(TrailsApiContext))]
     partial class TrailsApiContextModelSnapshot : ModelSnapshot
@@ -15,6 +15,35 @@ namespace Business.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.0");
+
+            modelBuilder.Entity("TrailsApi.Models.Trail", b =>
+                {
+                    b.Property<int>("TrailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Difficulty")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("TrailId");
+
+                    b.ToTable("Trails");
+
+                    b.HasData(
+                        new
+                        {
+                            TrailId = 1,
+                            Description = "practice trail",
+                            Difficulty = "medium",
+                            Name = "Seed Trail"
+                        });
+                });
 
             modelBuilder.Entity("TrailsApi.Models.TrailMarker", b =>
                 {
@@ -34,6 +63,9 @@ namespace Business.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<int>("TrailId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("isLandmark")
                         .HasColumnType("tinyint(1)");
 
@@ -41,6 +73,8 @@ namespace Business.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("TrailMarkerId");
+
+                    b.HasIndex("TrailId");
 
                     b.ToTable("TrailMarkers");
 
@@ -52,6 +86,7 @@ namespace Business.Migrations
                             Latitude = 45.490696,
                             Longitude = -122.49699200000001,
                             Name = "Powell Butte Trailhead",
+                            TrailId = 1,
                             isLandmark = false,
                             isTrailhead = true
                         },
@@ -62,6 +97,7 @@ namespace Business.Migrations
                             Latitude = 45.485812000000003,
                             Longitude = -122.649976,
                             Name = "Oaks Bottom Frog Pond",
+                            TrailId = 1,
                             isLandmark = true,
                             isTrailhead = false
                         },
@@ -72,9 +108,26 @@ namespace Business.Migrations
                             Latitude = 45.848579999999998,
                             Longitude = -122.78834999999999,
                             Name = "Sauvies Island Lighthouse",
+                            TrailId = 1,
                             isLandmark = true,
                             isTrailhead = false
                         });
+                });
+
+            modelBuilder.Entity("TrailsApi.Models.TrailMarker", b =>
+                {
+                    b.HasOne("TrailsApi.Models.Trail", "Trail")
+                        .WithMany("TrailMarkers")
+                        .HasForeignKey("TrailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trail");
+                });
+
+            modelBuilder.Entity("TrailsApi.Models.Trail", b =>
+                {
+                    b.Navigation("TrailMarkers");
                 });
 #pragma warning restore 612, 618
         }

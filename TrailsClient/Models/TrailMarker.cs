@@ -10,6 +10,10 @@ namespace TrailsClient.Models
   {
     public int TrailMarkerId { get; set; }
 
+    public virtual Trail Trail { get; set; }
+
+    public int TrailId { get; set; }
+
     public string Name { get; set; }
 
     public double Longitude { get; set; }
