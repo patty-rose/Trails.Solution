@@ -29,7 +29,11 @@ namespace TrailsApi.Controllers
     [HttpPost]
     public async Task<ActionResult<TrailMarker>> Post(TrailMarker trailMarker)
     {
+      Trail thisTrail = _db.Trails.FirstOrDefault(trail => trail.TrailId == trailMarker.TrailId);
       _db.TrailMarkers.Add(trailMarker);
+      thisTrail.TrailMarkers.Add(trailMarker);
+      trailMarker.Trail = thisTrail;
+
       await _db.SaveChangesAsync();
 
       return CreatedAtAction("Post", new { id = trailMarker.TrailMarkerId }, trailMarker);

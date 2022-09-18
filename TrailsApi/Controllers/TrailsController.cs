@@ -26,19 +26,6 @@ namespace TrailsApi.Controllers
       return await _db.Trails.ToListAsync();
     }
 
-    // [HttpGet("{id}/trailMarkers")]
-    // public IActionResult GetTrailMarkers(int trailId)
-    // {
-
-    //   var trailMarkers = _db.Trails<List<TrailMarker>>(
-    //       _reviewerRepository.GetReviewsByReviewer(reviewerId));
-
-    //   if (!ModelState.IsValid)
-    //       return BadRequest(ModelState);
-
-    //   return Ok(reviews);
-    // }
-
     [HttpPost]
     public async Task<ActionResult<Trail>> Post(Trail trail)
     {

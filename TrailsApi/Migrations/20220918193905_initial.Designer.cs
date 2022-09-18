@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrailsApi.Models;
 
-namespace Business.Migrations
+namespace Trails.Migrations
 {
     [DbContext(typeof(TrailsApiContext))]
-    [Migration("20220911183132_Initial")]
-    partial class Initial
+    [Migration("20220918193905_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,6 +17,35 @@ namespace Business.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.0");
+
+            modelBuilder.Entity("TrailsApi.Models.Trail", b =>
+                {
+                    b.Property<int>("TrailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Difficulty")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("TrailId");
+
+                    b.ToTable("Trails");
+
+                    b.HasData(
+                        new
+                        {
+                            TrailId = 1,
+                            Description = "practice trail",
+                            Difficulty = "medium",
+                            Name = "Seed Trail"
+                        });
+                });
 
             modelBuilder.Entity("TrailsApi.Models.TrailMarker", b =>
                 {
@@ -27,14 +56,17 @@ namespace Business.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("Latitude")
-                        .HasColumnType("int");
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double");
 
-                    b.Property<int>("Longitude")
-                        .HasColumnType("int");
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("TrailId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("isLandmark")
                         .HasColumnType("tinyint(1)");
@@ -44,6 +76,8 @@ namespace Business.Migrations
 
                     b.HasKey("TrailMarkerId");
 
+                    b.HasIndex("TrailId");
+
                     b.ToTable("TrailMarkers");
 
                     b.HasData(
@@ -51,9 +85,10 @@ namespace Business.Migrations
                         {
                             TrailMarkerId = 1,
                             Description = "dirt trail off of Springwater",
-                            Latitude = 2,
-                            Longitude = 1,
+                            Latitude = 45.490696,
+                            Longitude = -122.49699200000001,
                             Name = "Powell Butte Trailhead",
+                            TrailId = 1,
                             isLandmark = false,
                             isTrailhead = true
                         },
@@ -61,9 +96,10 @@ namespace Business.Migrations
                         {
                             TrailMarkerId = 2,
                             Description = "pond that seasonally has many frogs and frogs sounds",
-                            Latitude = 4,
-                            Longitude = 3,
+                            Latitude = 45.485812000000003,
+                            Longitude = -122.649976,
                             Name = "Oaks Bottom Frog Pond",
+                            TrailId = 1,
                             isLandmark = true,
                             isTrailhead = false
                         },
@@ -71,12 +107,29 @@ namespace Business.Migrations
                         {
                             TrailMarkerId = 3,
                             Description = "when you arrive to the lighthouse you have reached end of the trail! Enjoy!",
-                            Latitude = 6,
-                            Longitude = 5,
+                            Latitude = 45.848579999999998,
+                            Longitude = -122.78834999999999,
                             Name = "Sauvies Island Lighthouse",
+                            TrailId = 1,
                             isLandmark = true,
                             isTrailhead = false
                         });
+                });
+
+            modelBuilder.Entity("TrailsApi.Models.TrailMarker", b =>
+                {
+                    b.HasOne("TrailsApi.Models.Trail", "Trail")
+                        .WithMany("TrailMarkers")
+                        .HasForeignKey("TrailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trail");
+                });
+
+            modelBuilder.Entity("TrailsApi.Models.Trail", b =>
+                {
+                    b.Navigation("TrailMarkers");
                 });
 #pragma warning restore 612, 618
         }

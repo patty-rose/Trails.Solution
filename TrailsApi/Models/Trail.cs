@@ -14,8 +14,6 @@ namespace TrailsApi.Models
 
     public string Difficulty { get; set; }
 
-    public int Miles { get; set; }
-
     public virtual ICollection<TrailMarker> TrailMarkers { get; set; }
 
     public Trail()

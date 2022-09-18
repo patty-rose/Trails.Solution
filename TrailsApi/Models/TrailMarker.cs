@@ -6,6 +6,8 @@ namespace TrailsApi.Models
   {
     public int TrailMarkerId { get; set; }
 
+    public int TrailId { get; set; }
+
     public virtual Trail Trail { get; set; }
 
     public string Name { get; set; }

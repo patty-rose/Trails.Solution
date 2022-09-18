@@ -26,6 +26,9 @@
 
             @Html.LabelFor(model => model.Description)
             @Html.EditorFor(model => model.Description)
+
+            @Html.DisplayFor(model => model.TrailId)
+            @Html.DropDownList("TrailId")
           </div>
 
           <input class = "btn btn-secondary" type="submit" value="Add new Character"/>
