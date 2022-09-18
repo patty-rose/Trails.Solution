@@ -1,10 +1,17 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+.navbar { 
+  background-color: #247B97 !important; 
+  opacity: .8;
+  color: aliceblue;
+}
 
 a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  color: aliceblue;
+  font-family: 'Raleway', sans-serif;
 }
 
 /* Provide sufficient contrast against white background */
@@ -28,6 +35,7 @@ a {
 -------------------------------------------------- */
 html {
   font-size: 14px;
+  
 }
 @media (min-width: 768px) {
   html {
@@ -56,18 +64,64 @@ button.accept-policy {
 html {
   position: relative;
   min-height: 100%;
+  /* min-width: 100%; */
+  background: url(https://images.unsplash.com/photo-1497384401032-2182d2687715?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Raleway', sans-serif;
 }
 
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  margin: auto;
+  background: url(https://images.unsplash.com/photo-1497384401032-2182d2687715?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  font-family: 'Raleway', sans-serif;
 }
+
+.col-md-5 {
+  margin: auto;
+}
+
+button#createAdventureBtn {
+  background-image: url(../images/createAdventure.png);
+  background-size: cover;
+  width: 15rem;
+  height: 15rem;
+  padding: auto;
+  margin: auto;
+  margin-top: 35%;
+}
+
+button#findAdventureBtn {
+  background-image: url(../images/findAdventure.png);
+  background-size: cover;
+  width: 15rem;
+  height: 15rem;
+  padding: auto;
+  margin: auto;
+  margin-top: 35%;
+}
+
+img {
+  width: 50%;
+  height: auto;
+}
+
+
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px;
 }
 
 /* form formatting */
