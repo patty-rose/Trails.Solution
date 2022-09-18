@@ -6,11 +6,16 @@ namespace TrailsApi.Models
   {
     public TrailsApiContext(DbContextOptions<TrailsApiContext> options) : base(options)
     {
-
     }
 
+    public DbSet<Trail> Trails { get; set; }
     public DbSet<TrailMarker> TrailMarkers { get; set; }
     // public DbSet<GeoCoordinate> GeoCoordinates { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+      optionsBuilder.UseLazyLoadingProxies();
+    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

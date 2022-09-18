@@ -23,7 +23,7 @@ namespace TrailsApi.Controllers
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TrailMarker>>> Get()
     {
-      return await _db.TrailMarkers.ToListAsync();
+      return await _db.TrailMarkers.Include(trailMarker => trailMarker.Trail).ToListAsync();
     }
 
     [HttpPost]
