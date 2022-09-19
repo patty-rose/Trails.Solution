@@ -88,20 +88,21 @@ body {
 
 .col-md-5 {
   margin: auto;
+  width: fit-content;
 }
 
 button#createAdventureBtn {
-  background-image: url(../images/createAdventure.png);
+  background-image: url(../images/newCreateAdventure.png);
   background-size: cover;
   width: 15rem;
   height: 15rem;
-  padding: auto;
+  /* padding: auto; */
   margin: auto;
   margin-top: 35%;
 }
 
-button#findAdventureBtn {
-  background-image: url(../images/findAdventure.png);
+button#searchAdventureBtn {
+  background-image: url(../images/newSearchAdventure.png);
   background-size: cover;
   width: 15rem;
   height: 15rem;
