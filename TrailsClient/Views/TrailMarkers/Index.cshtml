@@ -1,83 +1,107 @@
-<h1>All TrailMarkers:</h1>
+@{
+  Layout = "_LayoutP";
 
-<p>@Html.ActionLink("Add new trailMarker", "Create")</p>
-
-<div id="viewDiv"></div>
-
-  @section Scripts
-  {
-    <style>
-        html,
-        body,
-        #viewDiv {
-          padding: 0;
-            margin: 0;
-            height: 88vh;
-            width: 99vw;
-        }
-      </style>
-      
-    <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css">
-    <script src="https://js.arcgis.com/4.24/"></script>
-
-    <script>
-      require(["esri/config","esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer"], function (esriConfig, Map, MapView, Graphic, GraphicsLayer) {
-
-        esriConfig.apiKey = "AAPK7691fadea68d4c688c09d108d1cd1d7cSxgmrGZq1iMecdeWEN29tO3QCLIzXUFXyg4PLvxYtshTAFhyxYK6D4d2m-vnNbrK";
-
-        const map = new Map({
-          basemap: "arcgis-topographic" // Basemap layer service
-        });
-
-        const view = new MapView({
-          map: map,
-          center: [-122.62495,45.52118], // Longitude, latitude --Laurelhurst Park OR
-          zoom: 13, // Zoom level
-          container: "viewDiv" // Div element
-        });
-
-        const graphicsLayer = new GraphicsLayer();
-        map.add(graphicsLayer);
-
-        let model = @Html.Raw(Json.Serialize(Model));//convert C# model to Javascript object
-
-        for(let i = 0; i < model.length; i++)
-        {
-          const point = { //Create a point
-            type: "point",
-            longitude: model[i]['longitude'],
-            latitude: model[i]['latitude']
-            //longitude: -122.62495,
-            //latitude: 45.52118
-          };
-          
-          //style point marker
-          const simpleMarkerSymbol = {
-            type: "simple-marker",
-            color: [226, 119, 40],  // Orange
-            outline: {
-              color: [255, 255, 255], // White
-              width: 1
-            }
-          };
-
-          const popupTemplate = {
-            title: "{Name}",
-            content: "{Description}"
-            }
-            const attributes = {
-              Name: model[i]['name'],
-              Description: model[i]['description']
-            }
-          const pointGraphic = new Graphic({
-            geometry: point,
-            symbol: simpleMarkerSymbol,
-
-            attributes: attributes,
-            popupTemplate: popupTemplate
-          });
-          graphicsLayer.add(pointGraphic);
-        }
-      });
-    </script>
   }
+
+<div class="container d-flex">
+  <div class="row">
+    <div class="col-4">
+      <div class="nav justify-content-end" style="padding-top: 10px;">
+        <p class="btn btn-info">@Html.ActionLink("Create Trail Marker", "Create")</p>
+      </div>
+      <div class="">
+      <h2>All TrailMarkers:</h2>
+      </div>
+
+      <div class="card">
+        <ul class="list-group list-group-flush">
+          @foreach (TrailMarker trailMarker in Model)
+          {
+            <p class="list-group-item">@Html.ActionLink($"{trailMarker.Name}", "Details", "TrailMarkers", new {id =
+            trailMarker.TrailMarkerId})</p>
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="col-8">
+      <div id="viewDiv"></div>
+    </div>
+  </div>
+</div>
+
+@section Scripts
+{
+<style>
+  @* html,
+  body, *@
+  #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+  }
+</style>
+
+<link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.24/"></script>
+
+<script>
+  require(["esri/config", "esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer"], function (esriConfig, Map, MapView, Graphic, GraphicsLayer) {
+
+    esriConfig.apiKey = "AAPK7691fadea68d4c688c09d108d1cd1d7cSxgmrGZq1iMecdeWEN29tO3QCLIzXUFXyg4PLvxYtshTAFhyxYK6D4d2m-vnNbrK";
+
+    const map = new Map({
+      basemap: "arcgis-topographic" // Basemap layer service
+    });
+
+    const view = new MapView({
+      map: map,
+      center: [-122.62495, 45.52118], // Longitude, latitude --Laurelhurst Park OR
+      zoom: 13, // Zoom level
+      container: "viewDiv" // Div element
+    });
+
+    const graphicsLayer = new GraphicsLayer();
+    map.add(graphicsLayer);
+
+    let model = @Html.Raw(Json.Serialize(Model));//convert C# model to Javascript object
+
+    for (let i = 0; i < model.length; i++) {
+      const point = { //Create a point
+        type: "point",
+        longitude: model[i]['longitude'],
+        latitude: model[i]['latitude']
+        //longitude: -122.62495,
+        //latitude: 45.52118
+      };
+
+      //style point marker
+      const simpleMarkerSymbol = {
+        type: "simple-marker",
+        color: [226, 119, 40],  // Orange
+        outline: {
+          color: [255, 255, 255], // White
+          width: 1
+        }
+      };
+
+      const popupTemplate = {
+        title: "{Name}",
+        content: "{Description}"
+      }
+      const attributes = {
+        Name: model[i]['name'],
+        Description: model[i]['description']
+      }
+      const pointGraphic = new Graphic({
+        geometry: point,
+        symbol: simpleMarkerSymbol,
+
+        attributes: attributes,
+        popupTemplate: popupTemplate
+      });
+      graphicsLayer.add(pointGraphic);
+    }
+  });
+</script>
+}
