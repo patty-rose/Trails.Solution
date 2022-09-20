@@ -4,6 +4,97 @@
 
 @using TrailsClient.Models
 <ol>
+
+<div id="viewDiv"></div>
+
+  @section Scripts
+  {
+    <style>
+        html,
+        body,
+        #viewDiv {
+          padding: 0;
+            margin: 0;
+            height: 88vh;
+            width: 99vw;
+        }
+      </style>
+      
+    <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.24/"></script>
+
+    <script>
+      require(["esri/config","esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer"], function (esriConfig, Map, MapView, Graphic, GraphicsLayer) {
+
+        esriConfig.apiKey = "AAPK7691fadea68d4c688c09d108d1cd1d7cSxgmrGZq1iMecdeWEN29tO3QCLIzXUFXyg4PLvxYtshTAFhyxYK6D4d2m-vnNbrK";
+
+        const map = new Map({
+          basemap: "arcgis-topographic" // Basemap layer service
+        });
+
+        const view = new MapView({
+          map: map,
+          center: [-122.62495,45.52118], // Longitude, latitude --Laurelhurst Park OR
+          zoom: 13, // Zoom level
+          container: "viewDiv" // Div element
+        });
+
+        const graphicsLayer = new GraphicsLayer();
+        map.add(graphicsLayer);
+
+        let model = @Html.Raw(Json.Serialize(Model));//convert C# model to Javascript object
+
+        for ( let i = 0; i < model.length; i++){
+          let trailMarkers = [];
+          for(let j= 0; j < model[i].trailMarkers.length; j++){
+            trailMarkers.push([model[i].trailMarkers[j].longitude, model[i].trailMarkers[j].latitude]);
+          }
+          
+          function chooseColor(index){
+            const RGBcodes = [[120,28,129], [64,67,153], [72,139,194], [107,178,140], [159,190,87], [210,179,63], [231,126,49], [217,33,32]];
+            if (index >= 0 && index <= 7){
+              return RGBcodes[i];
+            } else if (index >= 0){
+              while(index > 7){
+                index -= 7;
+              }
+              return RGBcodes[i];
+            }
+          }
+          
+          let color = [226, 119 - (i*10), i * 30];
+          
+          
+          const polyline = {
+            type: "polyline",
+            paths: trailMarkers
+          };
+          const simpleLineSymbol = {
+            type: "simple-line",
+            color: chooseColor(i),
+            width: 2
+          };
+          const popupTemplate = {
+            title: "{Name}",
+            content: "{Description}"
+          }
+          const attributes = {
+            Name: model[i]['name'],
+            Description: model[i]['description']
+          }
+          const polylineGraphic = new Graphic({
+            geometry: polyline,
+            symbol: simpleLineSymbol,
+            attributes: attributes,
+            popupTemplate: popupTemplate
+          });
+          graphicsLayer.add(polylineGraphic);
+        }
+      });
+    </script>
+  }
+
+
 @foreach (Trail trail in Model)
 {
   <ul>
