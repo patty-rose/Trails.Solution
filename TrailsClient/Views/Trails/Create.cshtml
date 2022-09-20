@@ -1,0 +1,21 @@
+@model TrailsClient.Models.Trail
+
+<h1>Add a new Trail</h1>
+        @using (Html.BeginForm())
+        {
+          <div class="settings">
+            @Html.HiddenFor(model => model.TrailId)
+
+            @Html.LabelFor(model => model.Name)
+            @Html.EditorFor(model => model.Name)
+
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+
+            @Html.LabelFor(model => model.Difficulty)
+            @Html.EditorFor(model => model.Difficulty)
+          </div>
+
+          <input class = "btn btn-secondary" type="submit" value="Add new Character"/>
+        }
+    </div>
