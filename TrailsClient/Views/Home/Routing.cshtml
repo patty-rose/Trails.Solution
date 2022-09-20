@@ -30,14 +30,15 @@
     "esri/Graphic",
     "esri/rest/route",
     "esri/rest/support/RouteParameters",
-    "esri/rest/support/FeatureSet"
+    "esri/rest/support/FeatureSet",
+    "esri/rest/support/TravelMode"
 
-  ], function (esriConfig, Map, MapView, Graphic, route, RouteParameters, FeatureSet) {
+  ], function (esriConfig, Map, MapView, Graphic, route, RouteParameters, FeatureSet, TravelMode) {
 
     esriConfig.apiKey = "AAPK7691fadea68d4c688c09d108d1cd1d7cSxgmrGZq1iMecdeWEN29tO3QCLIzXUFXyg4PLvxYtshTAFhyxYK6D4d2m-vnNbrK";
 
     const map = new Map({
-      basemap: "arcgis-navigation" //Basemap layer service
+      basemap: "arcgis-topographic" //Basemap layer service
     });
 
     const view = new MapView({
@@ -47,7 +48,45 @@
       zoom: 12
     });
 
-    const routeUrl = "https://route-api.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
+    const routeUrl = "https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World";
+
+  
+    const travelModeObject = {
+    "distanceAttributeName": "Miles",
+    "description": "Follows paths and roads that allow pedestrian traffic and finds solutions that optimize travel distance.",
+    "impedanceAttributeName": "Miles",
+    "simplificationToleranceUnits": "miles",
+    "uturnAtJunctions": "allow-backtrack",
+    "useHierarchy": false,
+    "name": "Walking Distance",
+    "simplificationTolerance": 2,
+    "timeAttributeName": "WalkTime",
+    "restrictionAttributeNames": ["Avoid Private Roads", "Avoid Roads Unsuitable for Pedestrians", "Preferred for Pedestrians", "Walking"],
+    "type": "Walk",
+    "id": "yFuMFwIYblqKEefX",
+    "attributeParameterValues": [{
+      "parameterName": "Restriction Usage",
+      "attributeName": "Avoid Private Roads",
+      "value": "AVOID_MEDIUM"
+    }, {
+      "parameterName": "Restriction Usage",
+      "attributeName": "Walking",
+      "value": "PROHIBITED"
+    }, {
+      "parameterName": "Restriction Usage",
+      "attributeName": "Preferred for Pedestrians",
+      "value": "PREFER_LOW"
+    }, {
+      "parameterName": "Walking Speed (km/h)",
+      "attributeName": "WalkTime",
+      "value": 5
+    }, {
+      "parameterName": "Restriction Usage",
+      "attributeName": "Avoid Roads Unsuitable for Pedestrians",
+      "value": "AVOID_HIGH"
+    }]
+  };
+
 
     view.on("click", function (event) {
 
@@ -83,7 +122,8 @@
           features: view.graphics.toArray()
         }),
 
-        returnDirections: true
+        returnDirections: true,
+        travelMode: travelModeObject
 
       });
 
