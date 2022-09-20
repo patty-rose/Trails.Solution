@@ -76,7 +76,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  margin: auto;
+  /* margin: auto; */
   background: url(https://images.unsplash.com/photo-1497384401032-2182d2687715?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -111,10 +111,33 @@ button#searchAdventureBtn {
   margin-top: 35%;
 }
 
+#createView {
+  margin-left: 0;
+}
+
+#createTrailMarkerForm {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+  justify-content: center;
+
+}
+
+.col-md-4 {
+  margin-left: 0;
+}
+
 img {
   width: 50%;
   height: auto;
 }
+
+input.btn-secondary {
+  margin: auto;
+  margin-top: .5rem;
+}
+
 
 
 .footer {

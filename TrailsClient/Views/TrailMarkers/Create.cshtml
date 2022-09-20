@@ -1,8 +1,8 @@
 @model TrailsClient.Models.TrailMarker
 
-<div class="container">
-  <div class="row">
-    <div class = "col">
+<div class="container" id="createView">
+  <div class="row ml-0" >
+    <div class = "col-md-4 text-center" id="createTrailMarkerForm">
       <h1>Add a new Trail Marker</h1>
         @using (Html.BeginForm())
         {
@@ -11,7 +11,7 @@
 
             @Html.LabelFor(model => model.Name)
             @Html.EditorFor(model => model.Name)
-
+            
             @Html.LabelFor(model => model.Longitude)
             @Html.EditorFor(model => model.Longitude)
 
@@ -27,14 +27,15 @@
             @Html.LabelFor(model => model.Description)
             @Html.EditorFor(model => model.Description)
 
+            @Html.LabelFor(model => model.TrailId)
             @Html.DisplayFor(model => model.TrailId)
-            @Html.DropDownList("TrailId")
+            @Html.DropDownList("TrailId", null, "-----------", new {@class="form-control"})
           </div>
 
           <input class = "btn btn-secondary" type="submit" value="Add new Character"/>
         }
     </div>
-    <div class = "col">
+    <div class = "col-md-8">
       <div id="viewDiv"></div>
     </div>
   </div>

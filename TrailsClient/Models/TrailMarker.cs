@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace TrailsClient.Models
 {
@@ -12,6 +13,7 @@ namespace TrailsClient.Models
 
     public virtual Trail Trail { get; set; }
 
+    [DisplayName("Choose Trail")]
     public int TrailId { get; set; }
 
     public string Name { get; set; }
@@ -20,8 +22,10 @@ namespace TrailsClient.Models
 
     public double Latitude { get; set; }
 
+    [DisplayName("Trailhead")]
     public bool isTrailhead { get; set; }
 
+    [DisplayName("Landmark")]
     public bool isLandmark { get; set; }
 
     public string Description { get; set; }
