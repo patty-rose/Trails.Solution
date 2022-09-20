@@ -1,11 +1,12 @@
-@* @{
-  Layout = null;
-  } *@
+@{
+  Layout = "_LayoutP";
+
+  }
 
 <div class="container d-flex">
   <div class="row">
     <div class="col-4">
-      <div class="nav justify-content-end">
+      <div class="nav justify-content-end" style="padding-top: 10px;">
         <p class="btn btn-info">@Html.ActionLink("Create Trail Marker", "Create")</p>
       </div>
       <div class="">
@@ -31,13 +32,13 @@
 @section Scripts
 {
 <style>
-  html,
-  body,
+  @* html,
+  body, *@
   #viewDiv {
     padding: 0;
     margin: 0;
-    height: 88vh;
-    width: 99vw;
+    height: 100vh;
+    width: 100vw;
   }
 </style>
 
