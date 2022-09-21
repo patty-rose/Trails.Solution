@@ -1,11 +1,49 @@
-<h1>All Trails:</h1>
+@{
+  Layout = "_LayoutP";
 
-<p>@Html.ActionLink("Add new trail", "Create")</p>
+}
 
 @using TrailsClient.Models
-<ol>
 
-<div id="viewDiv"></div>
+<div class="container d-flex" id="trailMarkerIndexView">
+  <div class="row">
+  <div class="col-md-4 trailMarkersList">
+  <div class="nav justify-content-end" style="padding-top: 10px;">
+    <p class="btn btn-info">@Html.ActionLink("Add new trail", "Create")</p>
+  </div>
+    <div class="">
+      <h2>All Trails</h2>
+    </div>
+
+    <div class="card overflow-auto">
+      <ul class="list-group list-group-flush">
+      @foreach (Trail trail in Model)
+      {
+      <ul>
+      <li> @Html.ActionLink($"{trail.Name}", "Details", new { id = trail.TrailId}) </li>
+        @foreach(TrailMarker trailMarker in trail.TrailMarkers)
+        {
+          <p class="list-group-item">@Html.ActionLink($"{trailMarker.Name}", "Details", "TrailMarkers", new {id = trailMarker.TrailMarkerId})</p>
+        }
+      </ul>
+      }
+      </ul>
+    </div>
+
+      <div class="d-flex justify-content-center">
+          <a href="/TrailMarkers/Create"><button id="homeTMIButton"></button></a>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div id="viewDiv"></div>
+    <div>
+
+  </div>
+</div>
+
+
+
 
   @section Scripts
   {
@@ -15,8 +53,8 @@
         #viewDiv {
           padding: 0;
             margin: 0;
-            height: 88vh;
-            width: 99vw;
+            height: 100vh;
+            width: 100vw;
         }
       </style>
       
@@ -95,19 +133,8 @@
   }
 
 
-@foreach (Trail trail in Model)
-{
-  <ul>
-      <li> @Html.ActionLink($"{trail.Name}", "Details", new { id = trail.TrailId}) </li>
-      @foreach(TrailMarker trailMarker in trail.TrailMarkers)
-      {
-        <p>@Html.ActionLink($"{trailMarker.Name}", "Details", "TrailMarkers", new {id = trailMarker.TrailMarkerId})</p>
-      }
-  </ul>
-  @* <a href="/Trails/Details/@(trail.TrailId)"><p>View Details</p></a> *@
-  <br>
+  @* <br>
   <p>@Html.ActionLink("Trail Details", "Details", new { id = trail.TrailId })</p>
   <p>@Html.ActionLink("Edit Trail", "Edit", new { id = trail.TrailId })</p>
-  <p>@Html.ActionLink("Delete Trail", "Delete", new { id = trail.TrailId })</p>
-}
-</ol>
+  <p>@Html.ActionLink("Delete Trail", "Delete", new { id = trail.TrailId })</p> *@
+
