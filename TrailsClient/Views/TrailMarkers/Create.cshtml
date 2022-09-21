@@ -1,8 +1,12 @@
+@{
+  Layout = "_LayoutP";
+}
+
 @model TrailsClient.Models.TrailMarker
 
 <div class="container" id="createView">
-  <div class="row ml-0" >
-    <div class = "col-md-4 text-center" id="createTrailMarkerForm">
+  <div class="row" >
+    <div class = "col-md-4 text-center no-float" id="createTrailMarkerForm">
       <h1>Add a new Trail Marker</h1>
         @using (Html.BeginForm())
         {
@@ -35,7 +39,7 @@
           <input class = "btn btn-secondary" type="submit" value="Add Trail Marker"/>
         }
     </div>
-    <div class = "col-md-8">
+    <div class = "col-md-8 no-float">
       <div id="viewDiv"></div>
     </div>
   </div>
@@ -47,8 +51,8 @@
   #viewDiv {
     padding: 0;
     margin: 0;
-    height: 88vh;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
   }
 </style>
   <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css">
