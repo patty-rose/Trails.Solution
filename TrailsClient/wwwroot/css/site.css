@@ -115,7 +115,7 @@ button#searchAdventureBtn {
 }
 
 
-#createView {
+#createView, #trailMarkerIndexView {
   /* margin-left: -10rem;
   margin-top: -1rem;
   margin-bottom: -3rem;
@@ -134,7 +134,35 @@ button#searchAdventureBtn {
   flex-direction: column;
   align-items:flex-start;
   justify-content: center;
+}
 
+.trailMarkersList {
+  background-color: #fff;
+  position: relative;
+}
+
+#homeTMIButton {
+  background-image: url(../images/homeButton.png);
+  background-size: cover;
+  width: 10rem;
+  height: 10rem;
+  padding: auto;
+  margin: auto;
+  position: absolute;
+  bottom: 5rem;
+  left: 8rem;
+}
+
+p.list-group-item a {
+  color:#247A97;
+}
+
+p.btn-info a {
+  color: #fff;
+}
+
+p.btn-info a:hover {
+  text-decoration: none;
 }
 
 .col-md-4 {
@@ -154,6 +182,7 @@ input.btn-secondary {
   margin: auto;
   margin-top: .5rem;
 }
+
 
 
 
