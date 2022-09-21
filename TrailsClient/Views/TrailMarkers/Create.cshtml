@@ -32,7 +32,7 @@
             @Html.DropDownList("TrailId", null, "-----------", new {@class="form-control"})
           </div>
 
-          <input class = "btn btn-secondary" type="submit" value="Add new Character"/>
+          <input class = "btn btn-secondary" type="submit" value="Add Trail Marker"/>
         }
     </div>
     <div class = "col-md-8">
@@ -67,7 +67,7 @@ require([
   esriConfig.apiKey = "AAPK7691fadea68d4c688c09d108d1cd1d7cSxgmrGZq1iMecdeWEN29tO3QCLIzXUFXyg4PLvxYtshTAFhyxYK6D4d2m-vnNbrK";
 
   const map = new Map({
-    basemap: "arcgis-navigation"
+    basemap: "arcgis-topographic"
   });
 
   const view = new MapView({
