@@ -1,56 +1,30 @@
-@model TrailsClient.Models.TrailMarker
-
-<!-- @* <h1>Trailmarker Info:</h1>
-<ul>
-    <li>ID: @Model.TrailMarkerId</li>
-    <li>Name: @Model.Name</li>
-    <li>Longitude: @Model.Longitude</li>
-    <li>Latitude: @Model.Latitude</li>
-    <li>Trailhead?: @Model.isTrailhead</li>
-    <li>Landmark?: @Model.isLandmark</li>
-    <li>Description: @Model.Description</li>
-</ul>
-<br>
-
-<div id="viewDiv"></div>
-
-@section Scripts
-{
-    <style>
-          html,
-          body,
-          #viewDiv {
-            padding: 0;
-            margin: 0;
-            height: 88vh;
-            width: 99vw;
-          }
-        </style>
-    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css"/>
-    <script src="https://js.arcgis.com/4.18/"></script>
-    <script>
-        require(["esri/Map", "esri/views/MapView"], function (Map, MapView) {
-            var map = new Map({
-                basemap: "topo-vector"
-            });
-            var view = new MapView({
-                container: "viewDiv", // Reference to the view div created in step 5
-                map: map, // Reference to the map object created before the view
-                zoom: 15, // Sets zoom level based on level of detail (LOD)
-                center: [@Model.Longitude, @Model.Latitude] // Sets center point of view using longitude,latitude
-            });
-        });
-    </script>
+@{
+  Layout = "_LayoutP";
 }
 
-<a href="/TrailMarkers/Edit/@(Model.TrailMarkerId)"><p>Edit</p></a>
-<br>
+@model TrailsClient.Models.TrailMarker
 
-<a href="/TrailMarkers"><p>Return</p></a>
+<div class="container">
+  <div class="row" id="trailMarkerDetails">
+    <div class="col-md-4 trailMarkDeetz card overflow-auto">
+        <h1>Trailmarker Info:</h1>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: @Model.TrailMarkerId</li>
+            <li class="list-group-item">Name: @Model.Name</li>
+            <li class="list-group-item">Longitude: @Model.Longitude</li>
+            <li class="list-group-item">Latitude: @Model.Latitude</li>
+            <li class="list-group-item">Trailhead?: @Model.isTrailhead</li>
+            <li class="list-group-item">Landmark?: @Model.isLandmark</li>
+            <li class="list-group-item">Description: @Model.Description</li>
+        </ul>
 
-<a href="/TrailMarkers/Delete/@(Model.TrailMarkerId)"><p>DELETE Trailmarker</p></a> *@ -->
-
-<div id="viewDiv"></div>
+        <div class="d-flex justify-content-center">
+          <a href="/Home/Index"><button id="homeTMIButton"></button></a>
+        </div>
+      </div>
+      <div class="col-md-8" id="viewDiv"></div>
+  </div>
+</div>
 
   @section Scripts
   {
@@ -61,8 +35,8 @@
         #viewDiv {
           padding: 0;
             margin: 0;
-            height: 88vh;
-            width: 99vw;
+            height: 100vh;
+            width: 100vw;
         }
       </style>
       
