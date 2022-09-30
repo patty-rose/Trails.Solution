@@ -3,8 +3,12 @@
 
 // Write your JavaScript code.
 
+
+
 $(document).ready(function() {
-    console.log('hello');
+console.log("site");
 
-
+  $("#TrailId").change(function () {
+    console.log(this.value);
+  });
 });

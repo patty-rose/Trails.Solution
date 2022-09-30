@@ -39,9 +39,9 @@ namespace Trails.Migrations
                         new
                         {
                             TrailId = 1,
-                            Description = "practice trail",
-                            Difficulty = "medium",
-                            Name = "Seed Trail"
+                            Description = "stroll through Laurelhurst Park",
+                            Difficulty = "easy",
+                            Name = "Laurelhurst Stroll"
                         });
                 });
 
@@ -82,34 +82,73 @@ namespace Trails.Migrations
                         new
                         {
                             TrailMarkerId = 1,
-                            Description = "dirt trail off of Springwater",
-                            Latitude = 45.490696,
-                            Longitude = -122.49699200000001,
-                            Name = "Powell Butte Trailhead",
+                            Latitude = 45.522210000000001,
+                            Longitude = -122.62578000000001,
                             TrailId = 1,
                             isLandmark = false,
-                            isTrailhead = true
+                            isTrailhead = false
                         },
                         new
                         {
                             TrailMarkerId = 2,
-                            Description = "pond that seasonally has many frogs and frogs sounds",
-                            Latitude = 45.485812000000003,
-                            Longitude = -122.649976,
-                            Name = "Oaks Bottom Frog Pond",
+                            Latitude = 45.522060000000003,
+                            Longitude = -122.62634,
                             TrailId = 1,
-                            isLandmark = true,
+                            isLandmark = false,
                             isTrailhead = false
                         },
                         new
                         {
                             TrailMarkerId = 3,
-                            Description = "when you arrive to the lighthouse you have reached end of the trail! Enjoy!",
-                            Latitude = 45.848579999999998,
-                            Longitude = -122.78834999999999,
-                            Name = "Sauvies Island Lighthouse",
+                            Latitude = 45.521389999999997,
+                            Longitude = -122.62942,
                             TrailId = 1,
-                            isLandmark = true,
+                            isLandmark = false,
+                            isTrailhead = false
+                        },
+                        new
+                        {
+                            TrailMarkerId = 4,
+                            Latitude = 45.521099999999997,
+                            Longitude = -122.63052,
+                            TrailId = 1,
+                            isLandmark = false,
+                            isTrailhead = false
+                        },
+                        new
+                        {
+                            TrailMarkerId = 5,
+                            Latitude = 45.520679999999999,
+                            Longitude = -122.63084000000001,
+                            TrailId = 1,
+                            isLandmark = false,
+                            isTrailhead = false
+                        },
+                        new
+                        {
+                            TrailMarkerId = 6,
+                            Latitude = 45.521450000000002,
+                            Longitude = -122.62761,
+                            TrailId = 1,
+                            isLandmark = false,
+                            isTrailhead = false
+                        },
+                        new
+                        {
+                            TrailMarkerId = 7,
+                            Latitude = 45.52055,
+                            Longitude = -122.6259,
+                            TrailId = 1,
+                            isLandmark = false,
+                            isTrailhead = false
+                        },
+                        new
+                        {
+                            TrailMarkerId = 8,
+                            Latitude = 45.520380000000003,
+                            Longitude = -122.62324,
+                            TrailId = 1,
+                            isLandmark = false,
                             isTrailhead = false
                         });
                 });

@@ -78,7 +78,28 @@ require([
   });
 
   //display selected trail map
-  
+          let model = @Html.Raw(Json.Serialize(Model));//convert C# model to Javascript object
+        console.log(model);
+        let trailMarkersCoordinates = [];
+        for ( let i = 0; i < model.trailMarkers.length; i++){
+          trailMarkersCoordinates.push([model.trailMarkers[i].longitude, model.trailMarkers[i].latitude]);
+        }
+        
+        const polyline = {
+        type: "polyline",
+        paths: trailMarkersCoordinates
+          };
+          const simpleLineSymbol = {
+            type: "simple-line",
+            color: [226, 119, 40], // Orange
+            width: 2
+          };
+          const polylineGraphic = new Graphic({
+          geometry: polyline,
+          symbol: simpleLineSymbol
+          });
+          graphicsLayer.add(polylineGraphic);
+  //end of selected trail map
 
   const serviceUrl = "http://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer";
 
@@ -110,8 +131,6 @@ require([
 
     });
   }
-
 });
 </script>
-
 }
