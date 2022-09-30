@@ -4,7 +4,7 @@
 
 ![Dev Team](/img/devsPic.jpg)
 
-#### A web application map api built to create hiking trails by placing markers on the map.
+#### Team developed application utilizing ArcGIS mapping API to create user-generated hiking landmarks and trails and store them in a .NET web API.
 
 ## Technologies Used
 
@@ -21,7 +21,7 @@
 
 ## Description
 
-This web application uses ArcGIS maps in conjunction with our Trails api. With the Trails api you can place makers on the map to create hiking trails. Click on the map to get the latitude and longitude, then you can add a name and description. Do this as many times as you like to create the trail you want and place landmarks along the way!
+This web application uses ArcGIS mapping API in conjunction with our Trails API. With the Trails API you can place makers on the map to create hiking trails. Click on the map to get the latitude and longitude, then you can add a name and description. Do this as many times as you like to create the trail you want and place landmarks along the way!
 
 ## Setup/Installation
 
@@ -69,13 +69,4 @@ This web application uses ArcGIS maps in conjunction with our Trails api. With t
 
 [MIT](LICENSE)
 
-Copyright (c) 2022 Megan McKissack, Louie Knolle, Ryan Gibson, Patty Rose
-
-
-
-
-Package needed for GeoCoordinate:
-
-Packages needed for Client:
-dotnet add package RestSharp --version 106.6.10
-dotnet add package Newtonsoft.Json --version 12.0.2
+Copyright (c) 2022 Megan McKissack, Louie Knolle, Ryan Gibson, Patty Otero
