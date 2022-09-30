@@ -42,5 +42,10 @@ namespace TrailsClient.Controllers
       Trail.Post(trail);
       return RedirectToAction("Index");
     }
+
+    public IActionResult AddTrailMarker()
+    {
+      return View();
+    }
   }
 }

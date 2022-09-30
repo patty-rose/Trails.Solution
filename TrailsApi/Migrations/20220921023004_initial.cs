@@ -50,22 +50,22 @@ namespace Trails.Migrations
             migrationBuilder.InsertData(
                 table: "Trails",
                 columns: new[] { "TrailId", "Description", "Difficulty", "Name" },
-                values: new object[] { 1, "practice trail", "medium", "Seed Trail" });
+                values: new object[] { 1, "stroll through Laurelhurst Park", "easy", "Laurelhurst Stroll" });
 
             migrationBuilder.InsertData(
                 table: "TrailMarkers",
                 columns: new[] { "TrailMarkerId", "Description", "Latitude", "Longitude", "Name", "TrailId", "isLandmark", "isTrailhead" },
-                values: new object[] { 1, "dirt trail off of Springwater", 45.490696, -122.49699200000001, "Powell Butte Trailhead", 1, false, true });
-
-            migrationBuilder.InsertData(
-                table: "TrailMarkers",
-                columns: new[] { "TrailMarkerId", "Description", "Latitude", "Longitude", "Name", "TrailId", "isLandmark", "isTrailhead" },
-                values: new object[] { 2, "pond that seasonally has many frogs and frogs sounds", 45.485812000000003, -122.649976, "Oaks Bottom Frog Pond", 1, true, false });
-
-            migrationBuilder.InsertData(
-                table: "TrailMarkers",
-                columns: new[] { "TrailMarkerId", "Description", "Latitude", "Longitude", "Name", "TrailId", "isLandmark", "isTrailhead" },
-                values: new object[] { 3, "when you arrive to the lighthouse you have reached end of the trail! Enjoy!", 45.848579999999998, -122.78834999999999, "Sauvies Island Lighthouse", 1, true, false });
+                values: new object[,]
+                {
+                    { 1, null, 45.522210000000001, -122.62578000000001, null, 1, false, false },
+                    { 2, null, 45.522060000000003, -122.62634, null, 1, false, false },
+                    { 3, null, 45.521389999999997, -122.62942, null, 1, false, false },
+                    { 4, null, 45.521099999999997, -122.63052, null, 1, false, false },
+                    { 5, null, 45.520679999999999, -122.63084000000001, null, 1, false, false },
+                    { 6, null, 45.521450000000002, -122.62761, null, 1, false, false },
+                    { 7, null, 45.52055, -122.6259, null, 1, false, false },
+                    { 8, null, 45.520380000000003, -122.62324, null, 1, false, false }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_TrailMarkers_TrailId",

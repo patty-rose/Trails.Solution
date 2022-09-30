@@ -21,17 +21,20 @@ namespace TrailsApi.Models
 
       builder.Entity<Trail>()
       .HasData(
-        new Trail { TrailId = 1, Name = "Seed Trail", Description = "practice trail", Difficulty = "medium" }
+        new Trail { TrailId = 1, Name = "Laurelhurst Stroll", Description = "stroll through Laurelhurst Park", Difficulty = "easy" }
       );
 
       builder.Entity<TrailMarker>()
       .HasData(
-        new TrailMarker { TrailMarkerId = 1, Name = "Powell Butte Trailhead", Longitude = -122.496992, Latitude = 45.490696, isTrailhead = true, isLandmark = false, Description = "dirt trail off of Springwater", TrailId = 1 },
-        new TrailMarker { TrailMarkerId = 2, Name = "Oaks Bottom Frog Pond", Longitude = -122.649976, Latitude = 45.485812, isTrailhead = false, isLandmark = true, Description = "pond that seasonally has many frogs and frogs sounds", TrailId = 1 },
-        new TrailMarker { TrailMarkerId = 3, Name = "Sauvies Island Lighthouse", Longitude = -122.78835, Latitude = 45.84858, isTrailhead = false, isLandmark = true, Description = "when you arrive to the lighthouse you have reached end of the trail! Enjoy!", TrailId = 1 }
+        new TrailMarker { TrailMarkerId = 1, TrailId = 1, Name = null, Longitude = -122.62578, Latitude = 45.52221, isTrailhead = false, isLandmark = false, Description = null },
+        new TrailMarker { TrailMarkerId = 2, TrailId =1, Name = null, Longitude = -122.62634, Latitude = 45.52206, isTrailhead = false, isLandmark = false, Description = null },
+        new TrailMarker { TrailMarkerId = 3, TrailId =1, Name = null, Longitude = -122.62942, Latitude = 45.52139, isTrailhead = false, isLandmark = false, Description = null },
+        new TrailMarker { TrailMarkerId = 4, TrailId =1, Name = null, Longitude = -122.63052, Latitude = 45.5211, isTrailhead = false, isLandmark = false, Description = null },
+        new TrailMarker { TrailMarkerId = 5, TrailId =1, Name = null, Longitude = -122.63084, Latitude = 45.52068, isTrailhead = false, isLandmark = false, Description = null },
+        new TrailMarker { TrailMarkerId = 6, TrailId =1, Name = null, Longitude = -122.62761, Latitude = 45.52145, isTrailhead = false, isLandmark = false, Description = null },
+        new TrailMarker { TrailMarkerId = 7, TrailId =1, Name = null, Longitude = -122.6259, Latitude = 45.52055, isTrailhead = false, isLandmark = false, Description = null },
+        new TrailMarker { TrailMarkerId = 8, TrailId =1, Name = null, Longitude = -122.62324, Latitude = 45.52038, isTrailhead = false, isLandmark = false, Description = null }
       );
-
-      
     }
   }
 }

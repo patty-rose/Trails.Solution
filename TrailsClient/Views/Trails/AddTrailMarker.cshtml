@@ -1,12 +1,8 @@
-@{
-  Layout = "_LayoutP";
-}
-
 @model TrailsClient.Models.TrailMarker
 
 <div class="container" id="createView">
-  <div class="row" >
-    <div class = "col-md-4 text-center no-float" id="createTrailMarkerForm">
+  <div class="row ml-0" >
+    <div class = "col-md-4 text-center" id="createTrailMarkerForm">
       <h1>Add a new Trail Marker</h1>
         @using (Html.BeginForm())
         {
@@ -36,10 +32,10 @@
             @Html.DropDownList("TrailId", null, "-----------", new {@class="form-control"})
           </div>
 
-          <input class = "btn btn-secondary" type="submit" value="Add Trail Marker"/>
+          <input class = "btn btn-secondary" type="submit" value="Add new Character"/>
         }
     </div>
-    <div class = "col-md-8 no-float">
+    <div class = "col-md-8">
       <div id="viewDiv"></div>
     </div>
   </div>
@@ -51,8 +47,8 @@
   #viewDiv {
     padding: 0;
     margin: 0;
-    height: 100vh;
-    width: 100vw;
+    height: 88vh;
+    width: 100%;
   }
 </style>
   <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css">
@@ -71,7 +67,7 @@ require([
   esriConfig.apiKey = "AAPK7691fadea68d4c688c09d108d1cd1d7cSxgmrGZq1iMecdeWEN29tO3QCLIzXUFXyg4PLvxYtshTAFhyxYK6D4d2m-vnNbrK";
 
   const map = new Map({
-    basemap: "arcgis-topographic"
+    basemap: "arcgis-navigation"
   });
 
   const view = new MapView({
@@ -82,7 +78,28 @@ require([
   });
 
   //display selected trail map
-  
+          let model = @Html.Raw(Json.Serialize(Model));//convert C# model to Javascript object
+        console.log(model);
+        let trailMarkersCoordinates = [];
+        for ( let i = 0; i < model.trailMarkers.length; i++){
+          trailMarkersCoordinates.push([model.trailMarkers[i].longitude, model.trailMarkers[i].latitude]);
+        }
+        
+        const polyline = {
+        type: "polyline",
+        paths: trailMarkersCoordinates
+          };
+          const simpleLineSymbol = {
+            type: "simple-line",
+            color: [226, 119, 40], // Orange
+            width: 2
+          };
+          const polylineGraphic = new Graphic({
+          geometry: polyline,
+          symbol: simpleLineSymbol
+          });
+          graphicsLayer.add(polylineGraphic);
+  //end of selected trail map
 
   const serviceUrl = "http://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer";
 
@@ -114,8 +131,6 @@ require([
 
     });
   }
-
 });
 </script>
-
 }
